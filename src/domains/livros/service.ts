@@ -1,6 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { response } from 'express';
 import { Livro } from './model';
 
 @Injectable()
@@ -43,7 +42,5 @@ export class LivrosService {
       throw new NotFoundException('Livro não cadastrado.');
     }
     livro.destroy();
-
-    response.sendStatus(204);
   }
 }

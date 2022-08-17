@@ -28,7 +28,6 @@ export class LivrosController {
 
   @Post()
   create(@Body() livro: Livro): Promise<Livro> {
-    console.log(Livro);
     return this.livrosService.create(livro);
   }
 
