@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { LivrosController } from './domains/livros/controller';
 import { Livro } from './domains/livros/model';
 import { LivrosService } from './domains/livros/service';
@@ -12,8 +10,8 @@ import { LivrosService } from './domains/livros/service';
     ConfigModule.forRoot(),
     SequelizeModule.forRoot({
       dialect: 'mysql',
-      host: 'localhost',
-      port: 3306,
+      host: process.env.HOST,
+      port: Number(process.env.PORT),
       username: process.env.USUARIO_BANCO_DADOS,
       password: process.env.SENHA_BANCO_DADOS,
       database: process.env.DATABASE,
@@ -22,7 +20,7 @@ import { LivrosService } from './domains/livros/service';
     }),
     SequelizeModule.forFeature([Livro]),
   ],
-  controllers: [AppController, LivrosController],
-  providers: [AppService, LivrosService],
+  controllers: [LivrosController],
+  providers: [LivrosService],
 })
 export class AppModule {}
